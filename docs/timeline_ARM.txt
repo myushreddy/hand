@@ -1,0 +1,400 @@
+# ARM Implementation Project Timeline
+**Project:** Implementing ARM (Adaptive Rank-Based Mutation) for Android Malware Detection  
+**Dataset:** MH-100K (100,000 samples)  
+**Duration:** January 24, 2026 - April 10, 2026 (11 weeks)  
+**Target:** Reproduce paper results with adversarial attack detection
+
+---
+
+## Week 1: January 24-30, 2026
+**Focus:** Project Setup & Data Preparation
+
+### Tasks:
+- [x] Organize project structure (folders: src/, data/, docs/, papers/, scripts/)
+- [x] Set up Python environment and install dependencies
+- [x] Extract and prepare MH-100K dataset
+- [ ] Data exploration and analysis
+  - Check dataset size, features, labels
+  - Identify missing values or anomalies
+  - Verify benign/malware ratio
+- [ ] Create data loading utilities
+- [ ] Document dataset statistics
+
+### Deliverables:
+- Clean MH-100K dataset loaded successfully
+- Data statistics report (feature count, sample distribution)
+- Working data pipeline
+
+### Tools/Libraries:
+- pandas, numpy, scikit-learn
+
+---
+
+## Week 2: January 31 - February 6, 2026
+**Focus:** Mutual Information (MI) Feature Selection
+
+### Tasks:
+- [ ] Implement MI-based feature filtering
+  - Calculate MI scores for all features (APIs + Permissions)
+  - Rank features by MI scores
+  - Select top k features (paper uses 155 features)
+- [ ] Validate MI results
+  - Compare with paper's feature importance
+  - Visualize feature distributions
+- [ ] Create feature subset for GA-RAM input
+- [ ] Save MI scores and selected features
+
+### Deliverables:
+- MI_scores_result.csv with all feature rankings
+- Selected feature subset (155 features)
+- Feature importance visualization
+
+### Dependencies:
+- Completed Week 1 (clean dataset)
+
+---
+
+## Week 3: February 7-13, 2026
+**Focus:** GA-RAM Algorithm - Part 1 (Core Components)
+
+### Tasks:
+- [ ] Implement population initialization (50 random binary feature subsets)
+- [ ] Implement fitness function
+  - Train Random Forest classifier
+  - Compute accuracy for each feature subset
+  - 80:20 train-test split
+- [ ] Implement tournament selection mechanism
+- [ ] Test basic GA loop structure
+
+### Deliverables:
+- Working population initialization
+- Fitness evaluation function
+- Tournament selection implementation
+- Initial GA structure (without crossover/mutation)
+
+### Key Parameters:
+- Population size: 50
+- Number of features: 155
+- Fitness metric: Classification accuracy
+
+---
+
+## Week 4: February 14-20, 2026
+**Focus:** GA-RAM Algorithm - Part 2 (Crossover & Mutation)
+
+### Tasks:
+- [ ] Implement 2-point crossover operator
+  - Select two crossover points
+  - Swap features between points
+  - Generate offspring feature subsets
+- [ ] Implement Rank-Based Adaptive Mutation (RAM)
+  - Sort feature subsets by accuracy (ascending)
+  - Assign ranks (worst = rank 1, best = rank n)
+  - Calculate mutation probability: pᵢ = p_max × (i-1)/(n-1)
+  - Apply mutation based on rank
+- [ ] Test crossover and mutation operators independently
+- [ ] Integrate into full GA-RAM loop
+
+### Deliverables:
+- 2-point crossover function
+- Rank-based adaptive mutation function
+- Complete GA-RAM algorithm
+
+### Key Parameters:
+- Crossover probability: 0.7
+- Max mutation rate (p_max): 0.6
+- Stopping threshold: 5 generations without improvement
+
+---
+
+## Week 5: February 21-27, 2026
+**Focus:** GA-RAM Training & General Malware Detection
+
+### Tasks:
+- [ ] Run full GA-RAM on MH-100K dataset
+  - Set generations (5-10 for testing, increase if needed)
+  - Monitor convergence
+  - Track best accuracy across generations
+- [ ] Select optimal feature subset
+- [ ] Train final Random Forest classifier with selected features
+- [ ] Evaluate on general malware test set
+  - Target: 98.6% accuracy
+  - Compute Precision, Recall, F1-Score, FPR
+- [ ] Save trained model and selected features
+
+### Deliverables:
+- Trained GA-RAM model
+- Optimal feature subset (48 features as per paper)
+- Performance metrics on general malware
+- Model checkpoint file
+
+### Success Criteria:
+- Accuracy ≥ 98% on general malware
+
+---
+
+## Week 6: February 28 - March 6, 2026
+**Focus:** White-Box Adversarial Attacks (FGSM & JSMA)
+
+### Tasks:
+- [ ] Implement FGSM attack
+  - Binary, additive-only variant
+  - Formula: x_adv = max(x, x + ε · sign(∇_x J(X, Y)))
+  - Generate 1500 adversarial samples
+- [ ] Implement JSMA attack
+  - Binary variant (modify inactive features only)
+  - Compute saliency map
+  - Generate 1500 adversarial samples
+- [ ] Test attacks on trained model
+- [ ] Verify adversarial samples preserve malicious functionality
+- [ ] Evaluate detection accuracy
+  - Target: FGSM ≥ 92%, JSMA ≥ 93%
+
+### Deliverables:
+- FGSM adversarial sample generator
+- JSMA adversarial sample generator
+- 1500 FGSM attack samples
+- 1500 JSMA attack samples
+- Detection performance metrics
+
+### Dependencies:
+- Week 5 (trained model)
+
+---
+
+## Week 7: March 7-13, 2026
+**Focus:** Grey-Box Adversarial Attacks (Salt-and-Pepper & Mimicry)
+
+### Tasks:
+- [ ] Implement Salt-and-Pepper noise attack
+  - Add random benign/irrelevant features
+  - Formula: x_adv[i] = max(x[i], noise[i])
+  - Generate adversarial samples
+- [ ] Implement Mimicry attack
+  - Modify malware to resemble benign apps
+  - Mimicry × 30 approach (paper methodology)
+  - Generate 250 mimicry samples
+- [ ] Test on trained model
+- [ ] Evaluate detection accuracy
+  - Target: Salt-and-pepper ≥ 98%, Mimicry ≥ 96%
+
+### Deliverables:
+- Salt-and-pepper attack generator
+- Mimicry attack generator
+- Attack samples dataset
+- Detection performance report
+
+### Note:
+- Paper uses 243 salt-and-pepper samples from existing work [9]
+
+---
+
+## Week 8: March 14-20, 2026
+**Focus:** Black-Box Adversarial Attacks (GAN-based)
+
+### Tasks:
+- [ ] Design GAN architecture
+  - Generator: Creates adversarial malware features
+  - Discriminator: Distinguishes real vs generated malware
+- [ ] Implement GAN training loop
+  - Minimax game objective
+  - Add Gaussian noise for stability
+- [ ] Generate adversarial samples (1500 samples)
+- [ ] Validate generated samples
+  - Ensure they preserve malicious behavior
+  - Check feature distributions
+- [ ] Evaluate detection accuracy
+  - Target: ≥ 92%
+
+### Deliverables:
+- Trained GAN model
+- 1500 GAN-generated adversarial samples
+- Detection performance metrics
+
+### Libraries:
+- TensorFlow/PyTorch for GAN implementation
+
+---
+
+## Week 9: March 21-27, 2026
+**Focus:** Zero-Day Malware Detection
+
+### Tasks:
+- [ ] Collect zero-day malware samples
+  - Use latest malware (2023-2024) from VirusShare
+  - Verify with VirusTotal
+  - Target: 1500 samples
+- [ ] Prepare test dataset (1500 zero-day + 1500 benign)
+- [ ] Evaluate trained model on zero-day samples
+  - Target: 94.1% accuracy
+  - Compute Precision (97.3% target), Recall (90.8% target)
+  - FPR target: 2.5%
+- [ ] Analyze failure cases
+- [ ] Document zero-day detection capabilities
+
+### Deliverables:
+- Zero-day malware test dataset
+- Detection performance metrics
+- Analysis report on detection vs new malware families
+
+### Success Criteria:
+- Accuracy ≥ 94% on unseen malware
+
+---
+
+## Week 10: March 28 - April 3, 2026
+**Focus:** SHAP Explanations & Interpretability
+
+### Tasks:
+- [ ] Install and configure SHAP library
+- [ ] Generate SHAP values for trained model
+  - Compute feature importance scores
+  - Identify top malware-indicating features
+  - Identify top benign-indicating features
+- [ ] Validate SHAP results against paper
+  - Top malware features: SEND_SMS, RECEIVE_SMS, READ_PHONE_STATE, etc.
+  - Top benign features: FACTORY_TEST, loadClass, requestFocus, etc.
+- [ ] Create SHAP visualizations
+  - Summary plots
+  - Force plots for individual predictions
+  - Dependence plots
+- [ ] Write interpretability analysis
+
+### Deliverables:
+- SHAP values for all features
+- Feature importance rankings (Table 14 from paper)
+- Visualizations (plots and charts)
+- Interpretability report
+
+### Libraries:
+- shap library
+
+---
+
+## Week 11: April 4-10, 2026
+**Focus:** Final Evaluation, Documentation & Results
+
+### Tasks:
+- [ ] Compile all performance metrics
+  - General malware: Accuracy, Precision, Recall, F1, FPR
+  - Adversarial attacks: Performance for each attack type
+  - Zero-day malware: All metrics
+- [ ] Create comparison tables
+  - Compare with paper's results
+  - Compare with other methods (if applicable)
+- [ ] Generate visualizations
+  - Accuracy comparison charts
+  - Confusion matrices
+  - ROC curves
+  - GA-RAM convergence plots
+- [ ] Write comprehensive documentation
+  - README with usage instructions
+  - Technical report explaining implementation
+  - Results summary
+- [ ] Code cleanup and commenting
+- [ ] Prepare final presentation/demo
+
+### Deliverables:
+- Complete performance report
+- All visualizations and charts
+- Updated README.md
+- Technical documentation
+- Clean, commented code
+- Final project presentation
+
+### Final Checklist:
+- [ ] All target accuracies achieved
+- [ ] All attack types implemented and tested
+- [ ] SHAP explanations generated
+- [ ] Code is clean and well-documented
+- [ ] Results match or exceed paper benchmarks
+
+---
+
+## Summary of Target Metrics (from Paper)
+
+### General Malware Detection:
+- **Accuracy:** 98.6%
+- **Precision:** 98.4%
+- **Recall:** 98.8%
+- **FPR:** 2.1%
+
+### Adversarial Attacks Detection:
+- **FGSM:** 92.3%
+- **JSMA:** 93.4%
+- **Salt-and-pepper:** 98.4%
+- **Mimicry:** 96.5%
+- **GAN:** 92.9%
+
+### Zero-Day Malware:
+- **Accuracy:** 94.1%
+- **Precision:** 97.3%
+- **Recall:** 90.8%
+- **FPR:** 2.5%
+
+---
+
+## Key Milestones
+
+| Date | Milestone |
+|------|-----------|
+| Feb 6 | MI feature selection completed |
+| Feb 20 | Full GA-RAM algorithm implemented |
+| Feb 27 | General malware detection working (98%+ accuracy) |
+| Mar 6 | White-box attacks implemented and tested |
+| Mar 13 | Grey-box attacks implemented and tested |
+| Mar 20 | Black-box (GAN) attacks implemented and tested |
+| Mar 27 | Zero-day detection evaluated |
+| Apr 3 | SHAP explanations completed |
+| Apr 10 | Final documentation and results ready |
+
+---
+
+## Dependencies & Prerequisites
+
+### Python Libraries Required:
+- pandas, numpy
+- scikit-learn (Random Forest, metrics)
+- matplotlib, seaborn (visualizations)
+- shap (interpretability)
+- tensorflow/pytorch (for GAN)
+- androguard (if extracting features from APKs)
+
+### Computational Resources:
+- GA-RAM training: May take several hours with 100K samples
+- GAN training: GPU recommended
+- Consider cloud computing if local resources insufficient
+
+### Data Requirements:
+- MH-100K dataset: 100,000 samples
+- Additional zero-day malware: 1500 samples
+- Benign applications for testing: 1500 samples
+
+---
+
+## Risk Mitigation
+
+### Potential Challenges:
+1. **GA-RAM convergence issues:** Adjust mutation rates, population size, or generations
+2. **Low accuracy on adversarial samples:** Re-tune GA-RAM parameters or feature selection
+3. **GAN training instability:** Use techniques like gradient penalty, spectral normalization
+4. **Computational limitations:** Use smaller sample sizes for testing, scale up gradually
+5. **Missing zero-day samples:** Use synthetic data or older unseen malware
+
+### Contingency Plans:
+- Build incremental checkpoints
+- Test each component independently before integration
+- Keep baseline implementations for comparison
+- Document issues and solutions
+
+---
+
+## Notes
+- Adjust timeline if needed based on progress
+- Focus on getting general malware detection working first (Week 5)
+- Adversarial attacks can be parallelized if time permits
+- Keep regular backups of code and datasets
+- Document experiments and results weekly
+
+**Last Updated:** January 26, 2026
+
