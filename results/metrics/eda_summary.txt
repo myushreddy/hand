@@ -1,0 +1,10 @@
+EDA SUMMARY
+================================================================================
+
+total_samples: 24925
+total_features: 95
+benign_count: 22088
+malware_count: 2837
+missing_values: 0
+
+Feature columns: 95 features
