@@ -1,0 +1,10 @@
+{
+    "train_size": 19940,
+    "test_size": 4985,
+    "train_benign": 17670,
+    "train_malware": 2270,
+    "test_benign": 4418,
+    "test_malware": 567,
+    "feature_count": 95,
+    "random_state": 42
+}
