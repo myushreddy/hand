@@ -1,0 +1,19 @@
+{
+    "dataset": "full_30k_mi155",
+    "feature_selection": "Mutual Information",
+    "total_features": 24836,
+    "selected_features": 155,
+    "samples": 28752,
+    "train_accuracy": 1.0,
+    "test_accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "fpr": 0.0,
+    "confusion_matrix": {
+        "tn": 5184,
+        "fp": 0,
+        "fn": 0,
+        "tp": 567
+    }
+}
