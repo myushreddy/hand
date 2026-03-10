@@ -41,13 +41,32 @@ print(f"Start Time: {datetime.now().strftime('%H:%M:%S')}")
 print()
 
 # ============================================================================
-# STEP 1: LOAD FULL DATASET
+# STEP 1: LOAD FULL DATASET WITH VALIDATION
 # ============================================================================
 print("STEP 1: Loading full dataset...")
 print("-" * 80)
 
 df = pd.read_csv('data/processed/dataset_with_labels_full.csv', low_memory=False)
-print(f"✓ Loaded: {df.shape[0]:,} samples × {df.shape[1]:,} columns")
+print(f"✓ Initial load: {df.shape[0]:,} samples × {df.shape[1]:,} columns")
+
+# Validate against baseline to ensure consistency
+EXPECTED_SAMPLES = 29915
+if df.shape[0] != EXPECTED_SAMPLES:
+    print(f"⚠️ WARNING: Expected {EXPECTED_SAMPLES:,} samples, got {df.shape[0]:,}")
+    print(f"   Difference: {abs(df.shape[0] - EXPECTED_SAMPLES):,} samples")
+    
+    # Check for NaN values
+    nan_count = df.isnull().sum().sum()
+    if nan_count > 0:
+        print(f"   Found {nan_count:,} NaN values - dropping rows with NaN...")
+        df = df.dropna()
+        print(f"   After dropna: {df.shape[0]:,} samples")
+
+# CRITICAL: Ensure we have exactly the same samples as baseline
+if df.shape[0] != EXPECTED_SAMPLES:
+    raise ValueError(f"Dataset size mismatch! Expected {EXPECTED_SAMPLES:,}, got {df.shape[0]:,}")
+
+print(f"✓ Validated: {df.shape[0]:,} samples (matches baseline)")
 
 # Separate features and labels
 metadata_cols = ['SHA256', 'NOME', 'PACOTE', 'API_MIN', 'API', 'CLASS']
