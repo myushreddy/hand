@@ -1,0 +1,94 @@
+{
+    "baseline": {
+        "dataset": "full_70k",
+        "total_samples": 29915,
+        "total_features": 24836,
+        "train_accuracy": 1.0,
+        "test_accuracy": 0.9752632458632793,
+        "precision": 0.9466950959488273,
+        "recall": 0.783068783068783,
+        "f1_score": 0.8571428571428571,
+        "false_positive_rate": 0.004615952732644018,
+        "confusion_matrix": {
+            "tn": 5391,
+            "fp": 25,
+            "fn": 123,
+            "tp": 444
+        }
+    },
+    "k_results": [
+        {
+            "k": 155,
+            "train_accuracy": 1.0,
+            "test_accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "fpr": 0.0,
+            "cv_mean": 1.0,
+            "cv_std": 0.0,
+            "confusion_matrix": {
+                "tn": 5184,
+                "fp": 0,
+                "fn": 0,
+                "tp": 567
+            },
+            "overfitting_gap": 0.0
+        },
+        {
+            "k": 200,
+            "train_accuracy": 1.0,
+            "test_accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "fpr": 0.0,
+            "cv_mean": 0.9999130434782609,
+            "cv_std": 0.00010649955403405603,
+            "confusion_matrix": {
+                "tn": 5184,
+                "fp": 0,
+                "fn": 0,
+                "tp": 567
+            },
+            "overfitting_gap": 0.0
+        },
+        {
+            "k": 300,
+            "train_accuracy": 1.0,
+            "test_accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "fpr": 0.0,
+            "cv_mean": 0.9998260964062633,
+            "cv_std": 0.00016267823147527856,
+            "confusion_matrix": {
+                "tn": 5184,
+                "fp": 0,
+                "fn": 0,
+                "tp": 567
+            },
+            "overfitting_gap": 0.0
+        },
+        {
+            "k": 500,
+            "train_accuracy": 1.0,
+            "test_accuracy": 0.9989567031820553,
+            "precision": 0.9964601769911504,
+            "recall": 0.9929453262786596,
+            "f1_score": 0.9946996466431095,
+            "fpr": 0.00038580246913580245,
+            "cv_mean": 0.99930436672557,
+            "cv_std": 0.0005395601671156694,
+            "confusion_matrix": {
+                "tn": 5182,
+                "fp": 2,
+                "fn": 4,
+                "tp": 563
+            },
+            "overfitting_gap": 0.0010432968179446833
+        }
+    ],
+    "test_date": "2026-03-10 18:36:10"
+}
