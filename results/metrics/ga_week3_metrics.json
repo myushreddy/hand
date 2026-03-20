@@ -1,0 +1,20 @@
+{
+    "generations_run": 16,
+    "best_fitness": 0.99872,
+    "final_accuracy": 1.0,
+    "final_precision": 1.0,
+    "final_recall": 1.0,
+    "final_f1": 1.0,
+    "final_fpr": 0.0,
+    "confusion_matrix": {
+        "tn": 5184,
+        "fp": 0,
+        "fn": 0,
+        "tp": 567
+    },
+    "n_features_selected": 58,
+    "n_features_total": 500,
+    "feature_reduction_percent": 88.4,
+    "ga_runtime_seconds": 509.23179507255554,
+    "timestamp": "2026-03-19T11:44:59.528417"
+}
