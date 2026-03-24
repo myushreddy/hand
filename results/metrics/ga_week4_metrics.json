@@ -1,0 +1,19 @@
+{
+  "type": "GA_WEEK4_RAM_IMPROVED",
+  "sample_size": 4000,
+  "generations": 32,
+  "best_fitness_ga": 0.991,
+  "final_accuracy": 0.999,
+  "final_precision": 1.0,
+  "final_recall": 0.9866666666666667,
+  "final_f1": 0.9932885906040269,
+  "final_fpr": 0.0,
+  "n_features_selected": 44,
+  "n_features_total": 500,
+  "feature_reduction_percent": 91.2,
+  "ga_runtime_sec": 109.29581665992737,
+  "p_max": 0.5,
+  "p_min": 0.05,
+  "target_features": 40,
+  "timestamp": "2026-03-20T12:58:06.836853"
+}
