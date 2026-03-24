@@ -1,0 +1,24 @@
+{
+  "type": "GA_WEEK4_FULL_DATASET",
+  "dataset_size": 28752,
+  "train_size": 23001,
+  "test_size": 5751,
+  "generations": 32,
+  "best_fitness_ga": 0.9534783515910276,
+  "final_accuracy": 0.9994783515910276,
+  "final_precision": 1.0,
+  "final_recall": 0.9947089947089947,
+  "final_f1": 0.9973474801061007,
+  "final_fpr": 0.0,
+  "n_features_selected": 63,
+  "n_features_total": 500,
+  "feature_reduction_percent": 87.4,
+  "confusion_matrix": {
+    "tp": 564,
+    "tn": 5184,
+    "fp": 0,
+    "fn": 3
+  },
+  "ga_runtime_sec": 853.8467605113983,
+  "timestamp": "2026-03-20T13:27:28.125020"
+}
