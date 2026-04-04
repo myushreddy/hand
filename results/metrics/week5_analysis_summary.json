@@ -1,0 +1,45 @@
+{
+  "analysis_date": "2026-03-29T09:55:13.933321",
+  "model_source": "week4_ga_full_dataset",
+  "dataset_size": 23001,
+  "n_features_analyzed": 63,
+  "top_10_rf_features": [
+    "vt_detection",
+    "APICall::Landroid/content/SharedPreferences.edit()",
+    "APICall::Landroid/util/SparseArray.size()",
+    "APICall::Landroid/view/MotionEvent.obtain()",
+    "APICall::Landroid/content/Intent.getStringExtra()",
+    "APICall::Landroid/view/View.setLayoutParams()",
+    "APICall::Landroid/content/Intent.setData()",
+    "APICall::Landroid/content/Intent.setComponent()",
+    "APICall::Landroid/view/View.getId()",
+    "APICall::Landroid/content/Context.getApplicationContext()"
+  ],
+  "top_10_shap_features": [
+    "vt_detection",
+    "APICall::Landroid/util/SparseArray.size()",
+    "APICall::Landroid/view/View.getId()",
+    "APICall::Landroid/view/MotionEvent.obtain()",
+    "APICall::Landroid/view/View.setLayoutParams()",
+    "APICall::Landroid/content/Intent.getStringExtra()",
+    "APICall::Landroid/content/SharedPreferences.edit()",
+    "APICall::Landroid/content/Intent.setData()",
+    "APICall::Landroid/content/Intent.setComponent()",
+    "APICall::Landroid/widget/ImageView.setImageDrawable()"
+  ],
+  "shap_computation_time": "114.0s",
+  "rf_importance_stats": {
+    "mean": 0.015873015873015872,
+    "median": 0.0013200435561511864,
+    "std": 0.08407850656423532,
+    "max": 0.6697602377794185,
+    "min": 0.00011482503164411133
+  },
+  "shap_importance_stats": {
+    "mean": 0.0035277694608628,
+    "median": 0.0010500510134128292,
+    "std": 0.01574289320592451,
+    "max": 0.1258690303203058,
+    "min": 0.00011814205269956498
+  }
+}
