@@ -1,0 +1,30 @@
+{
+  "ga_selected": 63,
+  "mi_top_155": 155,
+  "overlap": 21,
+  "overlap_percent": 33.333333333333336,
+  "ga_only": [
+    "APICall::Landroid/view/animation/AnimationUtils.currentAnimationTimeMillis()",
+    "APICall::Landroid/view/accessibility/AccessibilityNodeInfo.getBoundsInScreen()",
+    "APICall::Landroid/content/res/Resources.getResourceTypeName()",
+    "APICall::Landroid/content/pm/PackageManager.queryIntentServices()",
+    "APICall::Landroid/widget/TextView.setOnClickListener()",
+    "APICall::Landroid/view/ViewGroup.getWidth()",
+    "APICall::Landroid/widget/ImageButton.setOnClickListener()",
+    "APICall::Landroid/util/SparseArray.keyAt()",
+    "APICall::Landroid/os/Parcel.writeIntArray()",
+    "APICall::Landroid/net/Uri.encode()"
+  ],
+  "mi_only": [
+    "APICall::Landroid/view/View.setVisibility()",
+    "APICall::Landroid/view/MotionEvent.getPointerId()",
+    "APICall::Landroid/net/Uri.parse()",
+    "APICall::Landroid/content/Context.bindService()",
+    "APICall::Landroid/os/Message.sendToTarget()",
+    "APICall::Landroid/view/View.layout()",
+    "APICall::Landroid/view/View.getContext()",
+    "APICall::Landroid/content/res/TypedArray.getInt()",
+    "APICall::Landroid/content/res/Resources.getString()",
+    "APICall::Landroid/view/View.getBackground()"
+  ]
+}
